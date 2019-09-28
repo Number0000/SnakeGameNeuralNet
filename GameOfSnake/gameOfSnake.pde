@@ -4,8 +4,7 @@ int time = 0;
 int[] headx = new int[2500];
 int[] heady = new int[2500];
 int heading = 0;  //direction for the snake going, for right: 0, up: 1, left: 2, down: 3
-int foodx = random_placement();
-int foody = random_placement();
+Food food = new Food();
 boolean redo = true;
 boolean stopgame = false; //Neccessary variable to plot the game characters and boundaries
 boolean alive = true;
@@ -22,9 +21,7 @@ void draw(){
   if(stopgame){}
   else {  // continue game
     time += 1;
-    fill(255, 255, 255);
-    stroke(0);
-    rect(foodx, foody, 8, 8);
+    food.show();
     fill(0, 0, 0);
     stroke(0);
     rect(0, 0, width, 8);
@@ -74,8 +71,7 @@ void restart(){
     heady[i] = 0;
   }
   stopgame = false;
-  foodx = random_placement();
-  foody = random_placement();
+  food = new Food();
   snakesize = 5;
   time = 0;
   angle = 0;
@@ -107,10 +103,6 @@ void autopilot_switch(){
       println("autopilot on " + autopilot + " " + str(snakesize-1) + angle);
     }
   }
-}
-
-int random_placement(){
-  return (round(random(0, 47) + 1) * 8);
 }
 
 void travel() {
@@ -145,14 +137,13 @@ void travel() {
 }
 
 void display(){
-  if(headx[1] == foodx && heady[1] == foody){
+  if(headx[1] == food.pos.x && heady[1] == food.pos.y){
     snakesize+= 1;
     redo = true;
     while(redo){
-      foodx = random_placement();
-      foody = random_placement();
+      food = new Food();
       for(int i = 1; i < snakesize; i++){
-        if(foodx == headx[i] && foody == heady[i]){
+        if(food.pos.x == headx[i] && food.pos.y == heady[i]){
           redo = true;
         } 
         else {
@@ -185,10 +176,13 @@ void checkdead(){
 }
 
 void reportScore(){
+  stroke(125);
+  fill(255);
+  rect(125, 20, 150, 125);
   fill(0);
   text("GAME OVER", 200, 30);
   text("Score:  " + str(snakesize-1), 200, 55);
   text("Press SHIFT to RESTART", 200, 80);
   text("Press Z to PAUSE", 200, 105);
-  text("Press A to enable autopilot", 200, 130);
+  text("Press A to enable autopilot", 210, 130);
 }
