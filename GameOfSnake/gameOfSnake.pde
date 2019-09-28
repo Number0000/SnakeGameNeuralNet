@@ -172,12 +172,12 @@ void display(){
 void checkdead(){
   for(int i = 2; i < snakesize; i++){
     if(headx[1] == headx[i] && heady[1] == heady[i]){
-      //reportScore();
+      reportScore();
       stopgame = true;
       alive = false;
     }
     if(headx[1] >= (width-8) || heady[1] >= (height-8) || headx[1] <= 0 || heady[1] <= 0){
-      //reportScore();
+      reportScore();
       stopgame = true;
       alive = false;
     }
@@ -185,10 +185,10 @@ void checkdead(){
 }
 
 void reportScore(){
-  fill(255);
-  rect(125, 125, 160, 100);
   fill(0);
-  text("GAME OVER", 200, 150);
-  text("Score:  " + str(snakesize-1), 200, 175);
-  text("Press SHIFT to RESTART", 200, 200);
+  text("GAME OVER", 200, 30);
+  text("Score:  " + str(snakesize-1), 200, 55);
+  text("Press SHIFT to RESTART", 200, 80);
+  text("Press Z to PAUSE", 200, 105);
+  text("Press A to enable autopilot", 200, 130);
 }
