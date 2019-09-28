@@ -245,7 +245,7 @@ class Matrix{
   
   //----------------------------------------------
   //return a matrix which has a random number of values from this matrix and the rest from the parameter matrix
-  Matrix crossover(Matrix partner){
+  Matrix crossOver(Matrix partner){
     Matrix child = new Matrix(rows, cols);
     
     //pick a random point in the matrix

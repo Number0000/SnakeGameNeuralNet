@@ -81,6 +81,17 @@ class NeuralNet{
   
   //-----------------------------------------
   //crossover function for genetic algorithm
+  NeuralNet crossOver(NeuralNet partner){
+    //create a new child with layer matrices from both parents
+    NeuralNet child = new NeuralNet(iNodes, hNodes, oNodes);
+    child.whi = whi.crossOver(partner.whi);
+    child.whh = whh.crossOver(partner.whh);
+    child.woh = woh.crossOver(partner.woh);
+    return child;
+  }
+  
+  //-----------------------------------------
+  //return a neural net which is a clone of this neural net
   NeuralNet clone(){
     NeuralNet clone = new NeuralNet(iNodes, hNodes, oNodes);
     clone.whi = whi.clone();
